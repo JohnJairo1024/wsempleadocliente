@@ -1,0 +1,197 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://localhost/empleado-ws" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost/empleado-ws" targetNamespace="http://localhost/empleado-ws">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://localhost/empleado-ws">
+            <xs:element name="getEmpleadoByIdRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="idEmpleado" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmpleadoByIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="empleadoInfo" type="tns:empleadoInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="empleadoInfo">
+                <xs:sequence>
+                    <xs:element name="idEmpleado" type="xs:long"/>
+                    <xs:element name="nombre" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="getAllEmpleadosRequest">
+                <xs:complexType/>
+            </xs:element>
+            <xs:element name="getAllEmpleadosResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="empleadoInfo" type="tns:empleadoInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="serviceStatus">
+                <xs:sequence>
+                    <xs:element name="statusCode" type="xs:string"/>
+                    <xs:element name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="nuevoEmpleadoRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="nombres" type="xs:string"/>
+                        <xs:element name="apellidos" type="xs:string"/>
+                        <xs:element name="tipo_documento" type="xs:string"/>
+                        <xs:element name="numero_documento" type="xs:string"/>
+                        <xs:element name="fecha_nacimiento" type="xs:date"/>
+                        <xs:element name="fecha_vinculacion" type="xs:date"/>
+                        <xs:element name="cargo" type="xs:string"/>
+                        <xs:element name="salario" type="xs:double"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="nuevoEmpleadoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                        <xs:element name="empleadoInfo" type="tns:empleadoInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="actualizarEmpleadoRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="empleadoInfo" type="tns:empleadoInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="actualizarEmpleadoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarEmpleadoRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="idEmpleado" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="eliminarEmpleadoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="actualizarEmpleadoResponse">
+        <wsdl:part element="tns:actualizarEmpleadoResponse" name="actualizarEmpleadoResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="eliminarEmpleadoRequest">
+        <wsdl:part element="tns:eliminarEmpleadoRequest" name="eliminarEmpleadoRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getAllEmpleadosRequest">
+        <wsdl:part element="tns:getAllEmpleadosRequest" name="getAllEmpleadosRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="actualizarEmpleadoRequest">
+        <wsdl:part element="tns:actualizarEmpleadoRequest" name="actualizarEmpleadoRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEmpleadoByIdResponse">
+        <wsdl:part element="tns:getEmpleadoByIdResponse" name="getEmpleadoByIdResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="nuevoEmpleadoResponse">
+        <wsdl:part element="tns:nuevoEmpleadoResponse" name="nuevoEmpleadoResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getAllEmpleadosResponse">
+        <wsdl:part element="tns:getAllEmpleadosResponse" name="getAllEmpleadosResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="eliminarEmpleadoResponse">
+        <wsdl:part element="tns:eliminarEmpleadoResponse" name="eliminarEmpleadoResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="nuevoEmpleadoRequest">
+        <wsdl:part element="tns:nuevoEmpleadoRequest" name="nuevoEmpleadoRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEmpleadoByIdRequest">
+        <wsdl:part element="tns:getEmpleadoByIdRequest" name="getEmpleadoByIdRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="EmpleadoPort">
+        <wsdl:operation name="actualizarEmpleado">
+            <wsdl:input message="tns:actualizarEmpleadoRequest" name="actualizarEmpleadoRequest"> </wsdl:input>
+            <wsdl:output message="tns:actualizarEmpleadoResponse" name="actualizarEmpleadoResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarEmpleado">
+            <wsdl:input message="tns:eliminarEmpleadoRequest" name="eliminarEmpleadoRequest"> </wsdl:input>
+            <wsdl:output message="tns:eliminarEmpleadoResponse" name="eliminarEmpleadoResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllEmpleados">
+            <wsdl:input message="tns:getAllEmpleadosRequest" name="getAllEmpleadosRequest"> </wsdl:input>
+            <wsdl:output message="tns:getAllEmpleadosResponse" name="getAllEmpleadosResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getEmpleadoById">
+            <wsdl:input message="tns:getEmpleadoByIdRequest" name="getEmpleadoByIdRequest"> </wsdl:input>
+            <wsdl:output message="tns:getEmpleadoByIdResponse" name="getEmpleadoByIdResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="nuevoEmpleado">
+            <wsdl:input message="tns:nuevoEmpleadoRequest" name="nuevoEmpleadoRequest"> </wsdl:input>
+            <wsdl:output message="tns:nuevoEmpleadoResponse" name="nuevoEmpleadoResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="EmpleadoPortSoap11" type="tns:EmpleadoPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="actualizarEmpleado">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="actualizarEmpleadoRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="actualizarEmpleadoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="eliminarEmpleado">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="eliminarEmpleadoRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="eliminarEmpleadoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllEmpleados">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getAllEmpleadosRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getAllEmpleadosResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getEmpleadoById">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getEmpleadoByIdRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getEmpleadoByIdResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="nuevoEmpleado">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="nuevoEmpleadoRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="nuevoEmpleadoResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="EmpleadoPortService">
+        <wsdl:port binding="tns:EmpleadoPortSoap11" name="EmpleadoPortSoap11">
+            <soap:address location="http://localhost:8080/empleado"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
