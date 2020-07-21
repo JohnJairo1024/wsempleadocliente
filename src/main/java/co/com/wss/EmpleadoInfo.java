@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.11 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.07.20 a las 09:32:59 PM COT 
+// Generado el: 2020.07.20 a las 11:12:05 PM COT 
 //
 
 
@@ -11,7 +11,9 @@ package co.com.wss;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -24,8 +26,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="idEmpleado" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
- *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="fechaNacimiento" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
+ *         &lt;element name="fechaVinculacion" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -36,53 +38,64 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "empleadoInfo", propOrder = {
-    "idEmpleado",
-    "nombre"
+    "fechaNacimiento",
+    "fechaVinculacion"
 })
 public class EmpleadoInfo {
 
-    protected long idEmpleado;
     @XmlElement(required = true)
-    protected String nombre;
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar fechaNacimiento;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar fechaVinculacion;
 
     /**
-     * Obtiene el valor de la propiedad idEmpleado.
-     * 
-     */
-    public long getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    /**
-     * Define el valor de la propiedad idEmpleado.
-     * 
-     */
-    public void setIdEmpleado(long value) {
-        this.idEmpleado = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad nombre.
+     * Obtiene el valor de la propiedad fechaNacimiento.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public String getNombre() {
-        return nombre;
+    public XMLGregorianCalendar getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Define el valor de la propiedad fechaNacimiento.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setNombre(String value) {
-        this.nombre = value;
+    public void setFechaNacimiento(XMLGregorianCalendar value) {
+        this.fechaNacimiento = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad fechaVinculacion.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getFechaVinculacion() {
+        return fechaVinculacion;
+    }
+
+    /**
+     * Define el valor de la propiedad fechaVinculacion.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setFechaVinculacion(XMLGregorianCalendar value) {
+        this.fechaVinculacion = value;
     }
 
 }

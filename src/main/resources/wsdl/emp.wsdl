@@ -17,8 +17,8 @@
             </xs:element>
             <xs:complexType name="empleadoInfo">
                 <xs:sequence>
-                    <xs:element name="idEmpleado" type="xs:long"/>
-                    <xs:element name="nombre" type="xs:string"/>
+                    <xs:element name="fechaNacimiento" type="xs:date"/>
+                    <xs:element name="fechaVinculacion" type="xs:date"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="getAllEmpleadosRequest">
