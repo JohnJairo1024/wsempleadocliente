@@ -1,61 +1,63 @@
 package co.com.ws.services;
 
-import co.com.ws.SoapClient;
+import co.com.ws.client.SoapClient;
 import co.com.ws.dto.EmpleadoDTO;
 import co.com.ws.dto.MensajeOut;
+import co.com.ws.util.FechaUtil;
 import co.com.wss.NuevoEmpleadoRequest;
 import co.com.wss.NuevoEmpleadoResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 @Service
 @Slf4j
 public class EmpleadoService {
 
     @Autowired
-    private SoapClient clinet;
+    private SoapClient soapClient;
 
-    public NuevoEmpleadoResponse empleadows(
-            String nombres, String apellidos,
-            String tipoDocumento, String numeroDocumento,
-            Date fechaNacimiento, Date fechaVinculacion,
-            String cargo, double salario
-    ) {
+    /**
+     * @param entrada
+     * @return
+     */
+    public NuevoEmpleadoResponse empleadows(EmpleadoDTO entrada) {
 
-        NuevoEmpleadoRequest nuevoEmpleadoRequest = new NuevoEmpleadoRequest();
-        nuevoEmpleadoRequest.setNombres(nombres);
-        nuevoEmpleadoRequest.setApellidos(apellidos);
-        nuevoEmpleadoRequest.setTipoDocumento(tipoDocumento);
-        nuevoEmpleadoRequest.setNumeroDocumento(numeroDocumento);
-//        nuevoEmpleadoRequest.setFechaNacimiento(fechaNacimiento);
-//        nuevoEmpleadoRequest.setFechaVinculacion(fechaVinculacion);
-        nuevoEmpleadoRequest.setCargo(cargo);
-        nuevoEmpleadoRequest.setSalario(salario);
-
-        return clinet.getLoanStatus(nuevoEmpleadoRequest);
-
-    }
-
-    public MensajeOut empleadows(EmpleadoDTO entrada) {
-
-        MensajeOut mensajeOut = new MensajeOut();
-        mensajeOut.setMensaje("Exitoso....");
+        NuevoEmpleadoResponse mensajeOut = new NuevoEmpleadoResponse();
+        mensajeOut.setCodigoRespuesta("EXITOSO");
+        mensajeOut.setExitoso(true);
 
         NuevoEmpleadoRequest nuevoEmpleadoRequest = new NuevoEmpleadoRequest();
         nuevoEmpleadoRequest.setNombres(entrada.getNombres());
         nuevoEmpleadoRequest.setApellidos(entrada.getApellidos());
         nuevoEmpleadoRequest.setTipoDocumento(entrada.getTipoDocumento());
         nuevoEmpleadoRequest.setNumeroDocumento(entrada.getNumeroDocumento());
-//        nuevoEmpleadoRequest.setFechaNacimiento(fechaNacimiento);
-//        nuevoEmpleadoRequest.setFechaVinculacion(fechaVinculacion);
+
+        if (entrada.getFechaNacimiento() != null && !entrada.getFechaNacimiento().equals("")) {
+            XMLGregorianCalendar fechaNacimiento = FechaUtil.toXMLGregorianCalendar(entrada.getFechaNacimiento());
+            nuevoEmpleadoRequest.setFechaNacimiento(fechaNacimiento);
+        } else {
+            mensajeOut.setExitoso(false);
+            mensajeOut.setCodigoRespuesta("FALLIDO");
+            mensajeOut.setMensaje("Por favor ingresa la fecha de nacimiento...");
+            return mensajeOut;
+        }
+
+        if (entrada.getFechaVinculacion() != null && !entrada.getFechaVinculacion().equals("")) {
+            XMLGregorianCalendar fechaVinculacion = FechaUtil.toXMLGregorianCalendar(entrada.getFechaVinculacion());
+            nuevoEmpleadoRequest.setFechaVinculacion(fechaVinculacion);
+        } else {
+            mensajeOut.setExitoso(false);
+            mensajeOut.setCodigoRespuesta("FALLIDO");
+            mensajeOut.setMensaje("Por favor ingresa la fecha de vinculación...");
+            return mensajeOut;
+        }
+
         nuevoEmpleadoRequest.setCargo(entrada.getCargo());
         nuevoEmpleadoRequest.setSalario(entrada.getSalario());
 
-        clinet.getLoanStatus(nuevoEmpleadoRequest);
-
-        return mensajeOut;
+        return soapClient.getNuevoEmpleado(nuevoEmpleadoRequest);
     }
 }

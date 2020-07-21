@@ -14,7 +14,6 @@ public class MensajeOut {
 
     private String codigoRespuesta;
     private String mensaje;
-    private String fecha;
     private boolean exitoso;
 
     public MensajeOut(boolean exitoso, String mensaje) {

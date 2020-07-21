@@ -1,4 +1,4 @@
-package co.com.ws;
+package co.com.ws.client;
 
 import co.com.wss.NuevoEmpleadoRequest;
 import co.com.wss.NuevoEmpleadoResponse;
@@ -15,7 +15,7 @@ public class SoapClient {
 
     private WebServiceTemplate template;
 
-    public NuevoEmpleadoResponse getLoanStatus(NuevoEmpleadoRequest request) {
+    public NuevoEmpleadoResponse getNuevoEmpleado(NuevoEmpleadoRequest request) {
         template = new WebServiceTemplate(marshaller);
         NuevoEmpleadoResponse acknowledgement = (NuevoEmpleadoResponse) template.marshalSendAndReceive("http://localhost:8080/empleado",
                 request);

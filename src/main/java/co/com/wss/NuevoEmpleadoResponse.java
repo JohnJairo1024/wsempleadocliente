@@ -8,6 +8,8 @@
 
 package co.com.wss;
 
+import co.com.ws.dto.MensajeOut;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -41,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
     "empleadoInfo"
 })
 @XmlRootElement(name = "nuevoEmpleadoResponse")
-public class NuevoEmpleadoResponse {
+public class NuevoEmpleadoResponse extends MensajeOut {
 
     @XmlElement(required = true)
     protected ServiceStatus serviceStatus;

@@ -10,16 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
 public class WebserviceClientApplication {
-
-    @Autowired
-    private SoapClient clinet;
-
-    @PostMapping("/getLoanStatus")
-    public NuevoEmpleadoResponse invokeSoapClientToGetLoanStatus(@RequestBody NuevoEmpleadoRequest request) {
-        return clinet.getLoanStatus(request);
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(WebserviceClientApplication.class, args);
